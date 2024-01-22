@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheels Gym</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+            
+            background-image: url('{{ url_for("static", filename="create_image.jpg") }}');
+            background-size: 100%;
+            color: whitesmoke;
+            font-size: larger;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+</style>
+<body>
+    {% with messages = get_flashed_messages(category_filter=['create']) %}
+        {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="container mt-5">
+        <form action="/lifts/create" method="POST">
+            <h1 class="mb-4">Which Lift Do You Dominate?!</h1>
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="lift">Lift:</label>
+                <select class="form-control" name="lift" id="lift" required>
+                    <option value="Squat">Squat</option>
+                    <option value="Bench">Bench</option>
+                    <option value="Deadlift">Deadlift</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input type="number" class="form-control" name="weight" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/dashboard" class="btn btn-secondary">Home</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </form>
+    </div>
+</body>
+</html>

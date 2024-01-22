@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheels Gym</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+            
+            background-image: url('{{ url_for("static", filename="view_image.jpg") }}');
+            background-size: 100%;
+            color: whitesmoke;
+        }
+
+        table {
+        color:whitesmoke
+    }
+
+    table th{
+        color:whitesmoke
+    }
+
+    table td{
+        color: whitesmoke;
+        font-size: larger;
+    }
+</style>
+<body>
+    <h1 class="text-center mt-4">Welcome {{ user.name }}</h1>
+    <div class="container mt-4">
+        <div class="top">
+            <h2 class="text-center">Check Out This Big Lift!</h2>
+            <a href="/dashboard" class="btn btn-primary">Home</a>
+            <a href="/logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name:</th>
+                    <th>Age:</th>
+                    <th>Lift:</th>
+                    <th>Weight:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ lift.name }}</td>
+                    <td>{{ lift.age }}</td>
+                    <td>{{ lift.lift }}</td>
+                    <td>{{ lift.weight }}</td>
+                    <td>Posted By: {{ lift.poster.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheels Gym</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+            
+            background-image: url('{{ url_for("static", filename="dashboard_image2.jpg") }}');
+            background-size: 100%;
+            color:whitesmoke;
+            font-size: larger;
+            
+        }
+        
+    table {
+        color: whitesmoke;
+    }
+
+    
+    table th {
+        color: whitesmoke;
+    }
+
+    table td{
+        color: whitesmoke;
+    }
+</style>
+<body>
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1>Wheels Powerlifting Gym</h1>
+            <div class="top mt-3">
+                <h2>Welcome {{ user.name }}</h2>
+                <a href="/logout" class="btn btn-danger mr-2">Logout</a>
+                <a href="/lifts/create" class="btn btn-primary">Share Your Biggest Lift</a>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3>Some of Our Athletes' Biggest Lifts!</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Lift</th>
+                        <th>Weight</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lift in lifts %}
+                    <tr>
+                        <td>{{ lift.name }}</td>
+                        <td>{{ lift.age }}</td>
+                        <td>{{ lift.lift }}</td>
+                        <td>{{ lift.weight }}</td>
+                        <td>
+                            <a href="/lifts/{{ lift.id }}" class="btn btn-primary btn-sm">View</a>
+                            {% if lift.poster.id == user.id %}
+                            <a href="/lifts/edit/{{ lift.id }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="/lifts/delete/{{ lift.id }}" class="btn btn-danger btn-sm">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wheels Gym</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+            
+            background-image: url('{{ url_for("static", filename="edit_image.jpg") }}');
+            background-size: 100%;
+            color: whitesmoke;
+            font-size: larger;
+            
+        }
+</style>
+<body>
+    {% with messages = get_flashed_messages(category_filter=['create']) %}
+    {% if messages %}
+    <div class="flash" role="alert">
+        {% for message in messages %}
+        <p>{{message}}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <form action="/lifts/update" method="POST" class="container mt-5">
+        <h1>Welcome {{ lift.name }}</h1>
+        <h3>Did You Hit a PR?!</h3>
+        <input type="hidden" name="id" value="{{ lift.id }}">
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name" value="{{ lift.name }}">
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" class="form-control" name="age" value="{{ lift.age }}">
+        </div>
+        <div class="form-group">
+            <label for="lift">Lift:</label>
+            <select class="form-control" name="lift" id="lift">
+                <option value="Squat" {% if lift.lift == 'Squat' %}selected{% endif %}>Squat</option>
+                <option value="Bench" {% if lift.lift == 'Bench' %}selected{% endif %}>Bench</option>
+                <option value="Deadlift" {% if lift.lift == 'Deadlift' %}selected{% endif %}>Deadlift</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight:</label>
+            <input type="number" class="form-control" name="weight" value="{{ lift.weight }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/dashboard" class="btn btn-secondary">Home</a>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+        </form>
+</body>
+</html>
